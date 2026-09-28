@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secta Engenharia</title>
+<meta name="description" content="Secta Engenharia — soluções em Segurança do Trabalho, Elétrica, Cartografia, Agrimensura e tecnologia em calçados de segurança, em Bom Repouso - MG.">
+<meta property="og:title" content="Secta Engenharia">
+<meta property="og:description" content="Segurança, precisão e tecnologia para o seu negócio. Bom Repouso, MG.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --deep:#152019;
+    --deep-2:#1c2a22;
+    --paper:#ffffff;
+    --paper-2:#f4f3ef;
+    --yellow:#f3ae0e;
+    --yellow-deep:#c98e00;
+    --brick:#b8402f;
+    --steel:#5c6560;
+    --steel-light:#aeb6b0;
+    --ink:#181d1a;
+    --line: rgba(21,32,25,0.10);
+    --line-dark: rgba(255,255,255,0.14);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ color-scheme: dark; } }
+  :root[data-theme="dark"]{ color-scheme: dark; }
+
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans', system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3{font-family:'Archivo', system-ui, sans-serif; margin:0; text-wrap:balance;}
+  p{margin:0;}
+  section{position:relative;}
+  .wrap{max-width:1180px; margin:0 auto; padding-inline:24px;}
+  @media (max-width:640px){ .wrap{padding-inline:20px;} }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--yellow-deep);
+  }
+  section.on-dark .eyebrow{ color:var(--yellow); }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 28px; border-radius:999px;
+    font-family:'IBM Plex Sans'; font-weight:600; font-size:.95rem;
+    border:1.5px solid transparent; cursor:pointer;
+    text-decoration:none; transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    white-space:nowrap;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{ background:var(--yellow); color:var(--deep); }
+  .btn-primary:hover{ box-shadow:0 10px 26px -8px rgba(243,174,14,0.6); transform:translateY(-1px); }
+  .btn-outline{ background:transparent; border-color:rgba(255,255,255,0.55); color:#fff; }
+  .btn-outline:hover{ background:rgba(255,255,255,0.1); }
+  .btn svg{ width:18px; height:18px; flex:none; }
+
+  /* ============ HEADER ============ */
+  header#site-header{
+    position:sticky; top:env(safe-area-inset-top,0px); z-index:50;
+    background:rgba(255,255,255,0.96);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    transition:padding .25s ease;
+  }
+  header#site-header .bar{ display:flex; align-items:center; justify-content:space-between; padding-block:16px; }
+  header#site-header.scrolled .bar{ padding-block:11px; }
+  .logo{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo-mark{
+    width:38px; height:38px; flex:none; background:var(--deep); border-radius:9px;
+    position:relative; display:flex; align-items:center; justify-content:center;
+  }
+  .logo-mark svg{ width:20px; height:20px; }
+  .logo-text{ line-height:1.05; }
+  .logo-text .l1{ font-family:'Archivo'; font-weight:900; font-size:1.08rem; letter-spacing:.01em; color:var(--ink); }
+  .logo-text .l1 b{ color:var(--brick); font-weight:900; }
+  .logo-text .l2{ font-family:'IBM Plex Mono'; font-size:.58rem; letter-spacing:.14em; color:var(--steel); text-transform:uppercase; }
+
+  nav#main-nav{ display:flex; align-items:center; gap:28px; }
+  nav#main-nav a{ color:var(--ink); text-decoration:none; font-size:.92rem; font-weight:500; position:relative; padding-block:4px; }
+  nav#main-nav a::after{ content:''; position:absolute; left:0; right:100%; bottom:0; height:2px; background:var(--yellow); transition:right .22s ease; }
+  nav#main-nav a:hover::after{ right:0; }
+
+  .header-actions{ display:flex; align-items:center; gap:16px; }
+  .hamburger{ display:none; background:none; border:none; cursor:pointer; padding:6px; flex-direction:column; gap:5px; }
+  .hamburger span{ width:24px; height:2px; background:var(--ink); display:block; transition:.25s; }
+  .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2){ opacity:0; }
+  .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+  #mobile-menu{ display:none; flex-direction:column; background:var(--paper); border-top:1px solid var(--line); overflow:hidden; max-height:0; transition:max-height .3s ease; }
+  #mobile-menu.open{ display:flex; max-height:420px; }
+  #mobile-menu a{ color:var(--ink); text-decoration:none; padding:16px 24px; border-bottom:1px solid var(--line); font-size:.95rem; }
+
+  @media (max-width:860px){
+    nav#main-nav{ display:none; }
+    .header-actions .btn-primary-desktop{ display:none; }
+    .hamburger{ display:flex; }
+  }
+
+  /* ============ HERO (foto simulada) ============ */
+  .hero{
+    position:relative; color:#fff; overflow:hidden;
+    padding-block:110px 90px;
+    background:
+      linear-gradient(100deg, rgba(15,20,17,0.92) 0%, rgba(15,20,17,0.72) 40%, rgba(15,20,17,0.32) 75%, rgba(15,20,17,0.15) 100%),
+      url('assets/img/hero.png') center 30%/cover no-repeat;
+  }
+  .hero-inner{ position:relative; z-index:1; display:grid; gap:22px; max-width:640px; }
+  .hero-loc{
+    display:inline-flex; align-items:center; gap:8px; width:fit-content;
+    font-family:'IBM Plex Mono'; font-size:.78rem; letter-spacing:.06em; color:#fff;
+  }
+  .hero-loc svg{ width:15px; height:15px; color:var(--yellow); flex:none; }
+  .hero h1{ font-size:clamp(2.1rem, 5vw, 3.4rem); font-weight:800; line-height:1.14; letter-spacing:-.01em; }
+  .hero h1 .hl{ color:var(--yellow); }
+  .hero p.lead{ font-size:1.05rem; line-height:1.6; color:rgba(255,255,255,0.82); max-width:52ch; }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; margin-top:6px; }
+
+  /* ============ SECTION HEADS ============ */
+  .section-pad{ padding-block:80px; }
+  @media (max-width:640px){ .section-pad{ padding-block:56px; } }
+  .section-head{ max-width:640px; margin-bottom:48px; display:grid; gap:14px; }
+  .section-head h2{ font-size:clamp(1.6rem, 3.2vw, 2.2rem); font-weight:800; letter-spacing:-.01em; }
+  .section-head p{ color:var(--steel); font-size:1rem; line-height:1.6; }
+  .section-head.center{ margin-inline:auto; text-align:center; align-items:center; }
+  section.on-dark{ background:var(--deep); color:#fff; }
+  section.on-dark .section-head p{ color:var(--steel-light); }
+
+  /* ============ SERVICES (linha, sem cards) ============ */
+  .services-row{ display:grid; grid-template-columns:repeat(5,1fr); }
+  @media (max-width:980px){ .services-row{ grid-template-columns:repeat(2,1fr); gap:32px 20px; } }
+  @media (max-width:560px){ .services-row{ grid-template-columns:1fr; gap:28px; } }
+  .service-item{ display:flex; flex-direction:column; gap:14px; padding-inline:18px; position:relative; }
+  @media (min-width:981px){
+    .service-item:not(:last-child)::after{
+      content:''; position:absolute; right:0; top:6px; bottom:6px; width:1px; background:var(--line);
+    }
+  }
+  .service-icon{
+    width:52px; height:52px; border-radius:14px; background:var(--deep);
+    display:flex; align-items:center; justify-content:center; flex:none;
+  }
+  .service-icon svg{ width:24px; height:24px; color:var(--yellow); }
+  .service-item h3{ font-size:.98rem; font-weight:700; }
+  .service-item p{ font-size:.86rem; line-height:1.55; color:var(--steel); }
+
+  /* ============ ABOUT ============ */
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+  @media (max-width:860px){ .about-grid{ grid-template-columns:1fr; gap:36px; } }
+  .placeholder-img{
+    aspect-ratio:4/3; border-radius:18px; overflow:hidden;
+  }
+  .placeholder-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  .about-copy{ display:grid; gap:18px; }
+  .about-copy h2{ font-size:clamp(1.6rem,3vw,2.2rem); font-weight:800; }
+  .about-copy p.body{ color:var(--steel); font-size:1rem; line-height:1.65; }
+  .about-diffs{ display:flex; gap:26px; flex-wrap:wrap; margin-top:10px; }
+  .about-diff{ display:flex; flex-direction:column; align-items:flex-start; gap:10px; max-width:150px; }
+  .about-diff .badge{
+    width:44px; height:44px; border-radius:50%; background:var(--deep);
+    display:flex; align-items:center; justify-content:center; flex:none;
+  }
+  .about-diff .badge svg{ width:20px; height:20px; color:var(--yellow); }
+  .about-diff span{ font-size:.85rem; font-weight:600; line-height:1.3; }
+
+  /* ============ PROCESS ============ */
+  .process-track{ display:flex; align-items:flex-start; justify-content:space-between; gap:8px; flex-wrap:wrap; }
+  .process-step{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; flex:1 1 180px; min-width:150px; }
+  .process-arrow{ display:flex; align-items:center; padding-top:26px; color:var(--yellow); flex:0 0 auto; }
+  .process-arrow svg{ width:22px; height:22px; }
+  @media (max-width:760px){ .process-arrow{ display:none; } }
+  .process-num{
+    width:58px; height:58px; border-radius:50%; border:1.5px solid var(--line-dark);
+    display:flex; align-items:center; justify-content:center; background:var(--deep-2);
+  }
+  .process-num svg{ width:24px; height:24px; color:var(--yellow); }
+  .process-step h3{ font-size:.94rem; font-weight:700; color:#fff; max-width:16ch; }
+
+  /* ============ DIFFERENTIALS ============ */
+  .diff-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  @media (max-width:860px){ .diff-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:560px){ .diff-grid{ grid-template-columns:1fr; } }
+  .diff-card{
+    background:var(--paper-2); border-radius:16px; padding:28px 24px; display:grid; gap:14px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .diff-card:hover{ transform:translateY(-3px); box-shadow:0 14px 30px -14px rgba(21,32,25,0.25); }
+  .diff-card .badge{ width:44px; height:44px; border-radius:12px; background:var(--deep); display:flex; align-items:center; justify-content:center; }
+  .diff-card .badge svg{ width:20px; height:20px; color:var(--yellow); }
+  .diff-card h3{ font-size:.98rem; font-weight:700; }
+  .diff-card p{ font-size:.86rem; color:var(--steel); line-height:1.5; }
+
+  /* ============ PROJECTS ============ */
+  .projects-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  @media (max-width:860px){ .projects-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:560px){ .projects-grid{ grid-template-columns:1fr; } }
+  .project-tile .placeholder-img{ aspect-ratio:1/1; border-radius:14px; }
+
+  /* ============ CTA FINAL (foto simulada) ============ */
+  .cta-section{
+    position:relative; color:#fff; overflow:hidden;
+    background:
+      linear-gradient(95deg, rgba(15,20,17,0.93) 0%, rgba(15,20,17,0.78) 45%, rgba(15,20,17,0.4) 100%),
+      url('assets/img/cta.png') center 65%/cover no-repeat;
+    padding-block:64px;
+  }
+  .cta-inner{ display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap; }
+  .cta-copy{ max-width:520px; display:grid; gap:10px; }
+  .cta-copy h2{ font-size:clamp(1.4rem,3vw,1.9rem); font-weight:800; }
+  .cta-copy p{ color:rgba(255,255,255,0.78); font-size:.98rem; }
+  .cta-actions{ display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+  .cta-actions .hero-loc{ color:rgba(255,255,255,0.78); }
+
+  /* ============ FOOTER ============ */
+  footer{ background:var(--deep); color:var(--steel-light); padding-block:30px; }
+  .footer-row{ display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+  .footer-nav{ display:flex; gap:22px; flex-wrap:wrap; }
+  .footer-nav a{ color:#fff; text-decoration:none; font-size:.86rem; }
+  .footer-nav a:hover{ color:var(--yellow); }
+  .social-row{ display:flex; gap:10px; }
+  .social-row a{
+    width:34px; height:34px; border:1px solid var(--line-dark); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; text-decoration:none;
+  }
+  .social-row a svg{ width:15px; height:15px; color:#fff; }
+  .social-row a:hover{ border-color:var(--yellow); }
+  .footer-bottom{
+    margin-top:22px; padding-top:18px; border-top:1px solid var(--line-dark);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:.76rem; color:var(--steel-light);
+  }
+  .contact-strip{ display:flex; gap:22px; flex-wrap:wrap; font-size:.78rem; margin-top:16px; }
+  .contact-strip .ph{ color:var(--steel-light); font-style:normal; }
+
+  /* ============ WHATSAPP FLOAT ============ */
+  #wa-float{
+    position:fixed; right:20px; bottom:calc(20px + env(safe-area-inset-bottom,0px)); z-index:60;
+    width:56px; height:56px; border-radius:50%; background:#25d366;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 24px -6px rgba(0,0,0,0.4); text-decoration:none;
+  }
+  #wa-float svg{ width:28px; height:28px; color:#fff; }
+
+  .reveal{ opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease; }
+  .reveal.pending{ opacity:0; transform:translateY(18px); }
+  @media (prefers-reduced-motion:reduce){ .reveal.pending{ opacity:1; transform:none; } }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- HEADER -->
+<!-- ============================================================ -->
+<header id="site-header">
+  <div class="wrap bar">
+    <a href="#inicio" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f3ae0e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+      </span>
+      <span class="logo-text">
+        <span class="l1">SECTA <b>ENGENHARIA</b></span><br>
+        <span class="l2">Bom Repouso · Minas Gerais</span>
+      </span>
+    </a>
+    <nav id="main-nav">
+      <a href="#inicio">Início</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#diferenciais">Diferenciais</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-primary btn-primary-desktop" id="wa-header" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.92 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0 0 12.04 2m0 1.67c2.23 0 4.32.87 5.9 2.45a8.23 8.23 0 0 1 2.42 5.84c0 4.56-3.72 8.28-8.32 8.28a8.3 8.3 0 0 1-4.22-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.27-4.4c0-4.58 3.72-8.31 8.28-8.31M8.53 6.9c-.17 0-.45.06-.68.32-.24.25-.9.88-.9 2.15s.92 2.5 1.05 2.67c.13.17 1.8 2.87 4.45 3.9 2.2.87 2.65.7 3.13.65.47-.04 1.5-.6 1.72-1.2.21-.58.21-1.08.15-1.19-.06-.1-.24-.17-.5-.3-.26-.13-1.5-.75-1.74-.83-.23-.09-.4-.13-.58.13-.17.26-.66.83-.81 1-.15.17-.3.19-.55.06-.26-.13-1.08-.4-2.06-1.28-.76-.68-1.28-1.52-1.43-1.78-.15-.26-.02-.4.11-.53.12-.12.26-.3.4-.46.13-.15.17-.26.26-.43.08-.17.04-.32-.02-.45-.06-.13-.58-1.46-.81-2-.21-.52-.43-.45-.58-.46z"/></svg>
+        Fale conosco
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu">
+    <a href="#inicio">Início</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#diferenciais">Diferenciais</a>
+    <a href="#projetos">Projetos</a>
+    <a href="#contato">Contato</a>
+  </div>
+</header>
+
+<!-- ============================================================ -->
+<!-- HERO -->
+<!-- ============================================================ -->
+<section class="hero" id="inicio">
+  <div class="wrap hero-inner">
+    <span class="eyebrow" style="color:var(--yellow);">Soluções em engenharia</span>
+    <h1>Segurança, precisão e tecnologia para o <span class="hl">seu negócio.</span></h1>
+    <p class="lead">A Secta Engenharia oferece soluções completas em Segurança do Trabalho, Elétrica, Cartografia, Agrimensura e tecnologia em calçados de segurança.</p>
+    <span class="hero-loc">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>
+      Bom Repouso - MG
+    </span>
+    <div class="hero-actions">
+      <a class="btn btn-primary" id="wa-hero" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.92 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0 0 12.04 2m0 1.67c2.23 0 4.32.87 5.9 2.45a8.23 8.23 0 0 1 2.42 5.84c0 4.56-3.72 8.28-8.32 8.28a8.3 8.3 0 0 1-4.22-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.27-4.4c0-4.58 3.72-8.31 8.28-8.31"/></svg>
+        Fale conosco
+      </a>
+      <a class="btn btn-outline" href="#servicos">Conheça nossos serviços ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SERVIÇOS -->
+<!-- ============================================================ -->
+<section class="section-pad" id="servicos">
+  <div class="wrap">
+    <div class="services-row reveal pending" id="services-row"></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SOBRE -->
+<!-- ============================================================ -->
+<section class="section-pad" id="sobre" style="background:var(--paper-2);">
+  <div class="wrap about-grid">
+    <div class="placeholder-img reveal pending">
+      <img src="assets/img/sobre.png" alt="Capacete de segurança, óculos de proteção e planta técnica da Secta Engenharia" loading="lazy">
+    </div>
+    <div class="about-copy reveal pending">
+      <span class="eyebrow">Secta Engenharia</span>
+      <h2>Conhecimento técnico para cada desafio.</h2>
+      <p class="body">A Secta Engenharia, de Bom Repouso - MG, reúne conhecimento técnico, tecnologia e compromisso para oferecer soluções em diferentes áreas da engenharia. Nosso objetivo é entregar serviços com qualidade, precisão e segurança, sempre buscando soluções adequadas às necessidades de cada cliente.</p>
+      <div class="about-diffs" id="about-diffs"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- COMO TRABALHAMOS -->
+<!-- ============================================================ -->
+<section class="section-pad on-dark">
+  <div class="wrap">
+    <div class="section-head center reveal pending">
+      <span class="eyebrow">Como podemos ajudar</span>
+      <h2>Do diagnóstico à solução.</h2>
+    </div>
+    <div class="process-track reveal pending" id="process-track"></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- DIFERENCIAIS -->
+<!-- ============================================================ -->
+<section class="section-pad" id="diferenciais">
+  <div class="wrap">
+    <div class="section-head reveal pending">
+      <span class="eyebrow">Diferenciais</span>
+      <h2>O que guia o nosso trabalho.</h2>
+    </div>
+    <div class="diff-grid reveal pending" id="diff-grid"></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PROJETOS -->
+<!-- ============================================================ -->
+<section class="section-pad" id="projetos" style="background:var(--paper-2);">
+  <div class="wrap">
+    <div class="section-head reveal pending">
+      <span class="eyebrow">Projetos</span>
+      <h2>Áreas de atuação em campo.</h2>
+      <p>Espaço reservado para fotos reais dos trabalhos da Secta Engenharia — em breve substituído por registros próprios.</p>
+    </div>
+    <div class="projects-grid reveal pending" id="projects-grid"></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- CTA FINAL -->
+<!-- ============================================================ -->
+<section class="cta-section" id="contato">
+  <div class="wrap cta-inner">
+    <div class="cta-copy">
+      <h2>Sua empresa mais segura, eficiente e preparada.</h2>
+      <p>Entre em contato e descubra como a Secta Engenharia pode ajudar o seu negócio.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-primary" id="wa-cta" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.92 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0 0 12.04 2"/></svg>
+        Fale conosco
+      </a>
+      <span class="hero-loc">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>
+        Bom Repouso - MG
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <a href="#inicio" class="logo">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f3ae0e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+        </span>
+        <span class="logo-text">
+          <span class="l1" style="color:#fff;">SECTA <b>ENGENHARIA</b></span><br>
+          <span class="l2">Bom Repouso · Minas Gerais</span>
+        </span>
+      </a>
+      <nav class="footer-nav">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <div class="social-row">
+        <a href="#" id="fw-instagram" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </a>
+        <a href="#" id="fw-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.92 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0 0 12.04 2"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="contact-strip">
+      <span>Telefone: <em class="ph">[placeholder — inserir telefone]</em></span>
+      <span>WhatsApp: <em class="ph">[placeholder — inserir número]</em></span>
+      <span>E-mail: <em class="ph">[placeholder — inserir e-mail]</em></span>
+      <span>Instagram: <em class="ph">[placeholder — inserir @]</em></span>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Secta Engenharia — Bom Repouso, MG</span>
+      <span>Site em desenvolvimento — conteúdo institucional provisório</span>
+    </div>
+  </div>
+</footer>
+
+<a id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.92 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0 0 12.04 2"/></svg>
+</a>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ================= CONFIG — PREENCHER DEPOIS ================= */
+  // PLACEHOLDER: trocar pelo número real da Secta Engenharia, formato internacional sem espaços (ex: 5535999999999)
+  var WHATSAPP_NUMBER = "5535900000000";
+  var WHATSAPP_MESSAGE = "Olá! Vim pelo site da Secta Engenharia e gostaria de mais informações.";
+  // PLACEHOLDER: trocar pelo @ real do Instagram
+  var INSTAGRAM_URL = "https://instagram.com/secta.engenharia";
+
+  var waLink = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(WHATSAPP_MESSAGE);
+  ["wa-header","wa-hero","wa-cta","wa-float","fw-whatsapp"].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.href = waLink;
+  });
+  var ig = document.getElementById("fw-instagram");
+  if(ig) ig.href = INSTAGRAM_URL;
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  /* ================= ÍCONES ================= */
+  var ICONS = {
+    helmet: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M2 15h20"/><path d="M12 4v3"/><path d="M9 18v1a3 3 0 0 0 6 0v-1"/></svg>',
+    bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg>',
+    map: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15"/><path d="M15 6v15"/></svg>',
+    boot: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v7l-4 4v3a2 2 0 0 0 2 2h13a2 2 0 0 0 1.8-2.9L18 12V3"/><path d="M9 3h9"/><path d="M5 14h13"/></svg>',
+    compass: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-4 2 2-6z"/></svg>',
+    search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
+    clipboard: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="1"/><path d="M9 4V2h6v2"/><path d="M9 11h6"/><path d="M9 15h6"/></svg>',
+    gear: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
+    chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M12 20V4"/><path d="M20 20v-7"/></svg>',
+    book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4.8A2 2 0 0 1 6 3h14v16H6.5a2.5 2.5 0 0 0 0 5H20"/></svg>',
+    shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.4 7.9-8 9-4.6-1.1-8-4-8-9V6z"/></svg>',
+    target: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".5" fill="currentColor"/></svg>',
+    crosshair: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>',
+    cpu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>',
+    handshake: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12l4-4 4 3-3 3"/><path d="M6 11l5 5 3-2"/><path d="M14 14l3-3 5 4"/><path d="M11 16l1 1a2 2 0 0 0 3-3"/></svg>',
+    hardhat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 3v18M15 3v18"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+  };
+
+  var SERVICES = [
+    { icon:"helmet",  title:"Segurança do Trabalho", text:"Mais segurança para pessoas e empresas." },
+    { icon:"bolt",    title:"Elétrica",              text:"Projetos, laudos e soluções com segurança." },
+    { icon:"map",     title:"Cartografia",           text:"Mapeamento e dados precisos para melhores decisões." },
+    { icon:"boot",    title:"Tecnologia em calçados de segurança", text:"Qualidade e proteção para o dia a dia do trabalho." },
+    { icon:"compass", title:"Agrimensura",           text:"Levantamentos e medições com alta precisão." }
+  ];
+
+  var ABOUT_DIFFS = [
+    { icon:"shield",    text:"Experiência e compromisso" },
+    { icon:"handshake", text:"Atendimento personalizado" },
+    { icon:"target",    text:"Soluções sob medida" }
+  ];
+
+  var PROCESS = [
+    { icon:"search",    title:"Entendemos sua necessidade" },
+    { icon:"clipboard", title:"Analisamos e planejamos" },
+    { icon:"gear",      title:"Executamos com qualidade" },
+    { icon:"chart",     title:"Acompanhamos os resultados" }
+  ];
+
+  var DIFFERENTIALS = [
+    { icon:"book",      title:"Conhecimento técnico",       text:"Base técnica aplicada em cada uma das áreas de atuação da Secta." },
+    { icon:"shield",    title:"Segurança em primeiro lugar", text:"Toda solução é pensada priorizando a segurança de pessoas e processos." },
+    { icon:"target",    title:"Soluções personalizadas",     text:"Cada projeto é tratado de acordo com sua necessidade específica." },
+    { icon:"crosshair", title:"Precisão",                    text:"Atenção aos detalhes técnicos em cada etapa do trabalho." },
+    { icon:"cpu",       title:"Tecnologia aplicada",         text:"Uso de tecnologia como apoio à qualidade e eficiência das entregas." },
+    { icon:"handshake", title:"Atendimento próximo",         text:"Comunicação direta e acompanhamento em todas as etapas do projeto." }
+  ];
+
+  var PROJECTS = [
+    { label:"Segurança do Trabalho em campo",  img:"assets/img/projeto-seguranca.png" },
+    { label:"Instalação e projeto elétrico",   img:"assets/img/projeto-eletrica.png" },
+    { label:"Levantamento cartográfico",       img:"assets/img/projeto-cartografia.png" },
+    { label:"Calçados de segurança em uso",    img:"assets/img/projeto-calcados.png" },
+    { label:"Agrimensura e topografia",        img:"assets/img/projeto-agrimensura.png" },
+    { label:"Equipe técnica em obra",          img:"assets/img/projeto-equipe.png" }
+  ];
+
+  /* ================= RENDER ================= */
+  var servicesRow = document.getElementById("services-row");
+  SERVICES.forEach(function(s){
+    var el = document.createElement("div");
+    el.className = "service-item";
+    el.innerHTML =
+      '<span class="service-icon">' + ICONS[s.icon] + '</span>' +
+      '<h3>' + s.title + '</h3><p>' + s.text + '</p>';
+    servicesRow.appendChild(el);
+  });
+
+  var aboutDiffs = document.getElementById("about-diffs");
+  ABOUT_DIFFS.forEach(function(d){
+    var el = document.createElement("div");
+    el.className = "about-diff";
+    el.innerHTML = '<span class="badge">' + ICONS[d.icon] + '</span><span>' + d.text + '</span>';
+    aboutDiffs.appendChild(el);
+  });
+
+  var processTrack = document.getElementById("process-track");
+  PROCESS.forEach(function(p, i){
+    if(i > 0){
+      var arrow = document.createElement("div");
+      arrow.className = "process-arrow";
+      arrow.innerHTML = ICONS.arrow;
+      processTrack.appendChild(arrow);
+    }
+    var el = document.createElement("div");
+    el.className = "process-step";
+    el.innerHTML = '<div class="process-num">' + ICONS[p.icon] + '</div><h3>' + p.title + '</h3>';
+    processTrack.appendChild(el);
+  });
+
+  var diffGrid = document.getElementById("diff-grid");
+  DIFFERENTIALS.forEach(function(d){
+    var el = document.createElement("div");
+    el.className = "diff-card";
+    el.innerHTML = '<span class="badge">' + ICONS[d.icon] + '</span><h3>' + d.title + '</h3><p>' + d.text + '</p>';
+    diffGrid.appendChild(el);
+  });
+
+  var projectsGrid = document.getElementById("projects-grid");
+  PROJECTS.forEach(function(p){
+    var el = document.createElement("div");
+    el.className = "project-tile";
+    el.innerHTML =
+      '<div class="placeholder-img"><img src="' + p.img + '" alt="' + p.label + '" loading="lazy"></div>';
+    projectsGrid.appendChild(el);
+  });
+
+  /* ================= HEADER SCROLL ================= */
+  var header = document.getElementById("site-header");
+  var onScroll = function(){
+    if(window.scrollY > 12) header.classList.add("scrolled");
+    else header.classList.remove("scrolled");
+  };
+  window.addEventListener("scroll", onScroll, { passive:true });
+  onScroll();
+
+  /* ================= MOBILE MENU ================= */
+  var hamburger = document.getElementById("hamburger");
+  var mobileMenu = document.getElementById("mobile-menu");
+  hamburger.addEventListener("click", function(){
+    var open = mobileMenu.classList.toggle("open");
+    hamburger.classList.toggle("open", open);
+    hamburger.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  mobileMenu.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click", function(){
+      mobileMenu.classList.remove("open");
+      hamburger.classList.remove("open");
+      hamburger.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  /* ================= REVEAL ON SCROLL ================= */
+  try{
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(!reduceMotion && "IntersectionObserver" in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.remove("pending");
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold:0.12 });
+      document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+    } else {
+      document.querySelectorAll(".reveal").forEach(function(el){ el.classList.remove("pending"); });
+    }
+  }catch(e){
+    document.querySelectorAll(".reveal").forEach(function(el){ el.classList.remove("pending"); });
+  }
+})();
+</script>
+</body>
+</html>
